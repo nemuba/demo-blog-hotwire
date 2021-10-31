@@ -1,0 +1,10 @@
+<% if @post.errors.present? %>
+  <%= notice_stream(message: :error, status: 'red') %>
+
+  <%= form_post_stream(post: @post) %>
+
+<% else %>
+  <%= notice_stream(message: :update, status: 'green') %>
+
+  <%= turbo_stream.replace dom_id(@post), partial: 'post', locals: { post: @post } %>
+<% end %>

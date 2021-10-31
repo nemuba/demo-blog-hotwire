@@ -1,0 +1,15 @@
+<% if @post.errors.present? %>
+  <%= notice_stream(message: :error, status: 'red') %>
+
+  <%= form_post_stream(post: @post) %>
+  
+<% else %>
+  <%= notice_stream(message: :create, status: 'green') %>
+
+  <%= turbo_stream.replace :new_post do %>
+    <%= turbo_frame_tag :new_post %>
+  <% end %>
+
+  <%= turbo_stream.append 'posts', partial: 'post', locals: { post: @post } %>
+
+<% end %>
