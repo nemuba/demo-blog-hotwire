@@ -1,5 +1,12 @@
 <%= turbo_frame_tag dom_id post do %>
-  <%= form_with(model: post, class: "contents", id: 'form') do |form| %>
+  <%= form_with(
+    model: post, 
+    id: 'form',
+    class: "contents",
+    html: {
+      data: { controller: 'notice', action: 'submit->notice#clear' }
+    }
+  ) do |form| %>
     <% if post.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
         <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>

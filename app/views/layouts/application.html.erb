@@ -11,8 +11,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= turbo_frame_tag :notice, class: 'w-full' %>
+  <body class="bg-gray-700">
+    <%= turbo_frame_tag :notice, class: 'w-full' do %>
+    <% end %>
     
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
