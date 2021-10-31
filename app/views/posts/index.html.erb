@@ -1,7 +1,10 @@
 <div class="w-full">
   <div class="flex justify-between items-center">
     <h1 class="text-white text-lg font-bold text-4xl">Posts</h1>
-    <%= link_to 'New post', new_post_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium", data: { 'turbo-frame': 'new_post' } %>
+    <%= link_to 'New post', new_post_path,
+      class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium",
+      data: { 'turbo-frame': 'new_post' }
+    %>
   </div>
 
   <%= turbo_frame_tag :new_post %>
