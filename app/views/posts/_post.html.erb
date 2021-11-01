@@ -1,16 +1,15 @@
 <%= turbo_frame_tag dom_id post do %>
   <div class="bg-white w-full p-4 rounded-md mt-2">
-    <p class="my-5 text-lg font-bold text-4xl">
-      <%= post.title %>
-    </p>
+    <h1 class="my-5 text-lg font-bold text-gray-700 text-4xl hover:text-blue-400">
+      <%= link_to post.title, post_path(post) %>
+    </h1>
     <p class="my-5">
       <%= post.content %>
     </p>
 
-    <% if action_name != "show" %>
-      <%= link_to "Show this post", post, class: "rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium" %>
-      <%= link_to 'Edit this post', edit_post_path(post), class: "rounded-lg py-3 ml-2 px-5 bg-green-500 inline-block font-medium" %>
-      <hr class="mt-6">
-    <% end %>
+    <div class="w-full mt-2 flex flex-wrap border shadow p-2 rounded-md">
+      <p class="flex-1 text-center font-bold text-gray-700">Created at: <%= post.created_at.strftime('%d/%m/%Y') %></p>
+      <p class="flex-1 text-center font-bold text-gray-700">Comments: <%= post.comments.size %></p>
+    </div>
   </div>
 <% end %>

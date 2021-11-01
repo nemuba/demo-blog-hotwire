@@ -1,0 +1,14 @@
+<% if @comment.errors.present? %>
+  <%= comment_notice_stream(message: :error, status: 'red') %>
+
+<% else %>
+  <%= comment_notice_stream(message: :delete, status: 'green') %>
+
+  <%= turbo_stream.remove @comment %>
+
+  <%= turbo_stream.replace 'total_comments' do %>
+    <%= turbo_frame_tag :total_comments, class: 'mt-2 text-lg text-2xl mt-2 tex-gray-50' do %>
+      <%= @post.comments.size %> comments
+    <% end %>
+  <% end %>
+<% end %>

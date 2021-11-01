@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :posts
+  get 'comments/new'
+  resources :posts do
+    resources :comments
+  end
+
   get '/notice', to: 'posts#clear_message'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

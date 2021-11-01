@@ -1,0 +1,10 @@
+<%= turbo_frame_tag dom_id comment do %>
+  <div class="container w-full mx-auto bg-white p-4 rounded-md mt-2 border-b shadow">
+    <%= comment.content.to_s %>
+    <%= button_to "Delete", post_comment_path(comment.post, comment.id), 
+      method: :delete, 
+      class: "mt-5 bg-red-500 p-2 rounded-md text-center text-white",
+      data: { controller: 'confirm', confirm_message_value: "Remover comentário?", action: 'click->confirm#dialog'}
+    %>
+  </div>
+<% end %>

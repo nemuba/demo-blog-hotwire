@@ -1,5 +1,8 @@
-<%= turbo_frame_tag dom_id @post do %>
-  <div class="w-full bg-white rounded-md p-4 justify-start">
+<%= turbo_stream_from @post %>
+
+<%= turbo_frame_tag dom_id(@post) do %>
+  <div class="container bg-white p-2 rounded-md mt-2">
+  <div class="w-full bg-white rounded-md p-4 justify-start mt-2">
     <h1 class="text-lg font-bold text-4xl">
       <%= @post.title %>
     </h1>
@@ -7,11 +10,27 @@
       <%= @post.content %>
     </p>
 
-    <%= link_to 'Edit this post', edit_post_path(@post), class: "mt-2 rounded-lg py-3 px-5 bg-green-500 inline-block font-medium" %>
-      <%= link_to "Back to posts", posts_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-300 inline-block font-medium" %>
+    <%= link_to 'Edit this post', edit_post_path(@post), class: "mt-2 rounded-lg p-2 bg-green-500 inline-block font-medium text-white" %>
+      <%= link_to "Back to posts", posts_path, class: "ml-2 rounded-lg p-2 bg-gray-300 inline-block font-medium" %>
     <div class="inline-block ml-2">
-      <%= button_to 'Delete this post', post_path(@post), method: :delete, data: { controller: 'confirm', confirm_message_value: 'Deseja remover ?', action: 'click->confirm#dialog' }, class: "mt-2 rounded-lg py-3 px-5 bg-red-500 font-medium" %>
+      <%= button_to 'Delete this post', post_path(@post), method: :delete, data: { controller: 'confirm', confirm_message_value: 'Deseja remover ?', action: 'click->confirm#dialog' }, class: "mt-2 text-white rounded-lg p-2 bg-red-500 font-medium" %>
     </div>
-</div>
+  </div>
 
+  <div class="w-full bg-white rounded-md p-4 justify-start mt-1">
+    <div class="w-full mb-5">
+      <%= turbo_frame_tag :new_comment %>
+    </div>
+    <%= link_to 'New Comment', new_post_comment_path(@post), data: { turbo_frame: 'new_comment' }, class: 'bg-blue-500 text-white text-center p-2 rounded-md' %>
+
+    <div class="w-full pt-2">
+      <turbo-frame id="total_comments" class=" mt-2 text-lg text-2xl mt-2 tex-gray-50">
+        <%= @post.comments.size %> Comments
+      </turbo-frame>
+      <%= turbo_frame_tag :comments do %>
+        <%= render @post.comments %>
+      <% end %>
+    </div>
+  </div>
+</div>
 <% end %>

@@ -1,0 +1,7 @@
+<%= turbo_frame_tag :new_comment do %>
+
+<div class="w-full">
+  <h1 class="text-lg font-bold text-4xl">Comment new</h1>
+  <%= render partial: 'form', locals: { comment: @comment } %>
+</div>
+<% end %>
